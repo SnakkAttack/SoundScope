@@ -1,1 +1,15 @@
+# secrets & caches
 .env
+.cache/
+__pycache__/
+
+# local data and models
+data/*.csv
+data/*.parquet
+models/
+reports/
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
