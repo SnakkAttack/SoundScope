@@ -1,6 +1,7 @@
 # secrets & caches
 .env
-.cache/
+.cache*/
+cache*/
 __pycache__/
 
 # local data and models
