@@ -19,7 +19,7 @@ The `data/sample_tracks.csv` file is a hand-crafted dataset used to prototype th
 
 The notebook assumes access to common data science libraries such as `pandas`, `numpy`, `matplotlib`, `seaborn`, and `scikit-learn`. Install them in your environment before running the notebook:
 
-```bash
+```
 pip install pandas numpy matplotlib seaborn scikit-learn
 ```
 

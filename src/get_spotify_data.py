@@ -212,6 +212,19 @@ for label, pid in playlist_pairs:
 # ------------------------------------------------------------
 df = pd.DataFrame(all_rows)
 
+if df.empty:
+    print("[ERROR] No tracks were collected from any playlist.")
+    print(" - Check that the playlist IDs/URLs in playlists.txt are valid")
+    print(" - Make sure you can open each playlist link in your browser")
+    print(" - If needed, replace them with playlists from your own account")
+    raise SystemExit(1)
+
+if "track_id" not in df.columns:
+    print("[ERROR] 'track_id' column missing from collected data. "
+          "This usually means no valid tracks were returned.")
+    print(df.head())
+    raise SystemExit(1)
+
 before = len(df)
 df = df.dropna(subset=["track_id"]).drop_duplicates(subset=["track_id"])
 after = len(df)
@@ -232,3 +245,4 @@ out_path = "data/spotify_tracks.csv"
 df.to_csv(out_path, index=False, encoding="utf-8")
 print(f"Saved dataset to {out_path}")
 print(df.head(5).to_string(index=False))
+
