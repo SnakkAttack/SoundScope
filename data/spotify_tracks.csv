@@ -1,0 +1,51 @@
+track_id,track_name,artist,tempo,danceability,energy,valence,loudness,acousticness,instrumentalness,speechiness,liveness,popularity,genre,mood,era,spotify_url
+1,Again,Fetty Wap,148,0.84,0.72,0.55,-5.5,0.12,0.00,0.12,0.16,82,Hip-Hop,Happy,2010s,https://open.spotify.com/track/3ESSGgWzRf1xvP7G5hHMhB
+2,The Gummy Bear Song,Gummibar,130,0.86,0.78,0.90,-4.2,0.10,0.00,0.08,0.15,78,Pop,Happy,2000s,https://open.spotify.com/track/6nFYXpBgrNcZjbtNEuc6yR
+3,Axel F,Crazy Frog,138,0.88,0.92,0.80,-3.8,0.02,0.85,0.04,0.12,80,Electronic,Energetic,2000s,https://open.spotify.com/track/3PB2m8DG0y9j8EwMSr5MBN
+4,Cbat,Hudson Mohawke,160,0.79,0.93,0.62,-4.0,0.03,0.90,0.06,0.11,75,Electronic,Energetic,2010s,https://open.spotify.com/track/7Ek68mnhTBdhdgy3hXbugu
+5,Slow Dancing in the Dark,Joji,89,0.54,0.55,0.25,-7.5,0.32,0.00,0.04,0.18,84,Alternative,Sad,2010s,https://open.spotify.com/track/6rY5FAWxCdAGllYEOZMbjW
+6,My Jinji,Sunset Rollercoaster,94,0.70,0.53,0.55,-7.0,0.40,0.02,0.04,0.20,76,Indie,Calm,2010s,https://open.spotify.com/track/7npPPrZEDmeHMk6mxvIeFa
+7,Apple Pie,Lizzy McAlpine,120,0.60,0.52,0.48,-8.0,0.55,0.00,0.04,0.18,70,Indie,Calm,2020s,https://open.spotify.com/track/0zLnAV1lYEhVnKk3ITmCym
+8,bad guy,Billie Eilish,135,0.70,0.43,0.56,-6.0,0.25,0.00,0.10,0.13,95,Pop,Energetic,2010s,https://open.spotify.com/track/2Fxmhks0bxGSBdJ92vM42m
+9,bury a friend,Billie Eilish,120,0.62,0.68,0.30,-7.2,0.18,0.00,0.10,0.19,88,Pop,Sad,2010s,https://open.spotify.com/track/4SSnFejRGlZikf02HLewEF
+10,therefore i am,Billie Eilish,94,0.76,0.63,0.52,-6.5,0.18,0.00,0.07,0.15,86,Pop,Happy,2020s,https://open.spotify.com/track/20R4HfKloPKgXDqU7UKk3x
+11,Hot To Go!,Chappell Roan,127,0.85,0.88,0.92,-4.0,0.08,0.00,0.06,0.18,90,Pop,Energetic,2020s,https://open.spotify.com/track/4xdBrk0nFZaP54vvZj0yx7
+12,Femininomenon,Chappell Roan,134,0.84,0.86,0.80,-4.3,0.07,0.00,0.06,0.17,82,Pop,Energetic,2020s,https://open.spotify.com/track/53IRnAWx13PYmoVYtemUBS
+13,Good Luck Babe!,Chappell Roan,123,0.76,0.82,0.74,-4.7,0.10,0.00,0.05,0.16,88,Pop,Happy,2020s,https://open.spotify.com/track/0WbMK4wrZ1wFSty9F7FCgu
+14,drivers license,Olivia Rodrigo,144,0.51,0.52,0.18,-7.8,0.55,0.00,0.04,0.20,93,Pop,Sad,2020s,https://open.spotify.com/track/5wANPM4fQCJwkGd4rN57mH
+15,good 4 u,Olivia Rodrigo,167,0.70,0.92,0.65,-4.2,0.10,0.00,0.05,0.18,96,Rock,Energetic,2020s,https://open.spotify.com/track/4ZtFanR9U6ndgddUvNcjcG
+16,vampire,Olivia Rodrigo,138,0.52,0.64,0.30,-6.8,0.40,0.00,0.04,0.19,90,Pop,Sad,2020s,https://open.spotify.com/track/1kuGVB7EU95pJObxwvfwKS
+17,Blinding Lights,The Weeknd,171,0.80,0.73,0.75,-5.0,0.05,0.00,0.04,0.16,98,Pop,Happy,2020s,https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b
+18,Save Your Tears,The Weeknd,118,0.75,0.70,0.72,-5.5,0.12,0.00,0.04,0.16,94,Pop,Happy,2020s,https://open.spotify.com/track/5QO79kh1waicV47BqGRL3g
+19,Starboy,The Weeknd,186,0.77,0.80,0.63,-5.2,0.08,0.00,0.06,0.17,92,Electronic,Energetic,2010s,https://open.spotify.com/track/7MXVkk9YMctZqd1Srtv4MB
+20,Dance Monkey,Tones and I,98,0.82,0.59,0.72,-6.3,0.18,0.00,0.12,0.21,96,Pop,Happy,2010s,https://open.spotify.com/track/2XU0oxnq2qxCpomAAuJY8K
+21,Levitating,Dua Lipa,103,0.78,0.82,0.84,-4.3,0.10,0.00,0.05,0.14,95,Pop,Happy,2020s,https://open.spotify.com/track/39LLxExYz6ewLAcYrzQQyP
+22,Dont Start Now,Dua Lipa,124,0.79,0.87,0.79,-4.1,0.05,0.00,0.06,0.15,94,Pop,Energetic,2010s,https://open.spotify.com/track/3PfIrDoz19wz7qK7tYeu62
+23,As It Was,Harry Styles,174,0.73,0.60,0.65,-5.6,0.12,0.00,0.04,0.13,97,Pop,Happy,2020s,https://open.spotify.com/track/4LRPiXqCikLlN15c3yImP7
+24,Anti-Hero,Taylor Swift,97,0.72,0.65,0.54,-6.2,0.18,0.00,0.05,0.17,96,Pop,Calm,2020s,https://open.spotify.com/track/0V3wPSX9ygBnCm8psDIegu
+25,Cruel Summer,Taylor Swift,170,0.70,0.82,0.78,-4.5,0.10,0.00,0.05,0.15,95,Pop,Energetic,2010s,https://open.spotify.com/track/1BxfuPKGuaTgP7aM0Bbdwr
+26,Circles,Post Malone,120,0.70,0.63,0.64,-6.0,0.25,0.00,0.05,0.15,93,Hip-Hop,Calm,2010s,https://open.spotify.com/track/21jGcNKet2qwijlDFuPiPb
+27,Sunflower,Post Malone and Swae Lee,90,0.78,0.61,0.70,-5.8,0.30,0.00,0.05,0.14,95,Hip-Hop,Happy,2010s,https://open.spotify.com/track/3KkXRkHbMCARz0aVfEt68P
+28,Sicko Mode,Travis Scott,155,0.75,0.87,0.55,-4.0,0.05,0.00,0.21,0.20,92,Hip-Hop,Energetic,2010s,https://open.spotify.com/track/2xLMifQCjDGFmkHkpNLD9h
+29,goosebumps,Travis Scott,130,0.69,0.71,0.48,-5.3,0.13,0.00,0.16,0.17,90,Hip-Hop,Calm,2010s,https://open.spotify.com/track/6gBFPUFcJLzWGx4lenP6h2
+30,Kill Bill,SZA,123,0.64,0.57,0.53,-6.5,0.30,0.00,0.05,0.18,94,RnB,Calm,2020s,https://open.spotify.com/track/3OHfY25tqY28d16oZczHc8
+31,Snooze,SZA,135,0.71,0.59,0.58,-6.8,0.35,0.00,0.05,0.20,90,RnB,Calm,2020s,https://open.spotify.com/track/4iZ4pt7kvcaH6Yo8UoZ4s2
+32,Paint The Town Red,Doja Cat,160,0.82,0.71,0.70,-5.0,0.10,0.00,0.24,0.16,93,Hip-Hop,Happy,2020s,https://open.spotify.com/track/2IGMVunIBsBLtEQyoI1Mu7
+33,Say So,Doja Cat,111,0.80,0.73,0.82,-5.2,0.16,0.00,0.06,0.18,92,Pop,Happy,2020s,https://open.spotify.com/track/3Dv1eDb0MEgF93GpLXlucZ
+34,Rush,Troye Sivan,124,0.81,0.84,0.80,-4.3,0.06,0.00,0.05,0.16,88,Pop,Energetic,2020s,https://open.spotify.com/track/4ZnkygoWLzcGbQYCm3lkae
+35,One Kiss,Calvin Harris and Dua Lipa,124,0.86,0.83,0.85,-4.0,0.06,0.00,0.05,0.14,93,Electronic,Happy,2010s,https://open.spotify.com/track/7ef4DlsgrMEH11cDZd32M6
+36,Bad Habit,Steve Lacy,169,0.72,0.56,0.65,-6.4,0.28,0.00,0.06,0.16,92,Indie,Calm,2020s,https://open.spotify.com/track/4k6Uh1HXdhtusDW5y8Gbvy
+37,Sweater Weather,The Neighbourhood,124,0.56,0.62,0.45,-7.0,0.20,0.00,0.04,0.22,90,Alternative,Sad,2010s,https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6
+38,Somebody That I Used to Know,Gotye,129,0.56,0.55,0.35,-7.2,0.45,0.00,0.04,0.21,88,Alternative,Sad,2010s,https://open.spotify.com/track/4wCmqSrbyCgxEXROQE6vtV
+39,Mr Brightside,The Killers,148,0.54,0.92,0.76,-4.6,0.06,0.00,0.04,0.17,95,Rock,Energetic,2000s,https://open.spotify.com/track/003vvx7Niy0yvhvHt4a68B
+40,Take On Me,a-ha,169,0.68,0.80,0.82,-5.0,0.16,0.00,0.04,0.20,93,Pop,Happy,1980s,https://open.spotify.com/track/2WfaOiMkCvy7F5fcp2zZ8L
+41,Billie Jean,Michael Jackson,117,0.79,0.74,0.74,-5.5,0.18,0.00,0.06,0.20,95,Pop,Happy,1980s,https://open.spotify.com/track/7J1uxwnxfQLu4APicE5Rnj
+42,Dreams,Fleetwood Mac,120,0.64,0.54,0.65,-7.0,0.45,0.00,0.03,0.23,90,Rock,Calm,1970s,https://open.spotify.com/track/1lbXEepatjRVjoG8pZMtdp
+43,Hotel California,Eagles,147,0.60,0.64,0.55,-7.5,0.40,0.00,0.03,0.25,92,Rock,Calm,1970s,https://open.spotify.com/track/40riOy7x9W7GXjyGp4pjAv
+44,Smells Like Teen Spirit,Nirvana,117,0.55,0.95,0.55,-3.5,0.02,0.00,0.05,0.30,93,Rock,Energetic,1990s,https://open.spotify.com/track/5ghIJDpPoe3CfHMGu71E6T
+45,Seven Nation Army,The White Stripes,124,0.65,0.80,0.60,-5.0,0.10,0.00,0.06,0.22,91,Rock,Energetic,2000s,https://open.spotify.com/track/3dPQuX8Gs42Y7b454ybpMR
+46,Lose Yourself,Eminem,171,0.72,0.86,0.52,-4.2,0.09,0.00,0.22,0.21,94,Hip-Hop,Energetic,2000s,https://open.spotify.com/track/5Z01UMMf7V1o0MzF86s6WJ
+47,Uptown Funk,Mark Ronson and Bruno Mars,115,0.88,0.80,0.93,-4.5,0.14,0.00,0.06,0.20,97,Funk,Happy,2010s,https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS
+48,Shape of You,Ed Sheeran,96,0.82,0.65,0.72,-5.8,0.18,0.00,0.08,0.16,99,Pop,Happy,2010s,https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3
+49,Stay,The Kid LAROI and Justin Bieber,170,0.67,0.76,0.60,-5.2,0.18,0.00,0.05,0.16,96,Pop,Energetic,2020s,https://open.spotify.com/track/5HCyWlXZPP0y6Gqq8TgA20
+50,Super Shy,NewJeans,127,0.86,0.77,0.85,-4.4,0.18,0.00,0.05,0.18,90,Pop,Happy,2020s,https://open.spotify.com/track/5sdQOyqq2IDhvmx2lHOpwd

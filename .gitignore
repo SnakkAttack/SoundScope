@@ -6,9 +6,7 @@ __pycache__/
 
 # local data and models
 data/*.csv
-data/*.parquet
-models/
-reports/
+!data/spotify_tracks.csv
 
 # OS/editor junk
 .DS_Store
