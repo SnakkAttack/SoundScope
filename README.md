@@ -1,5 +1,7 @@
 # SoundScope
 
+Use the most up to date version here! - [SoundScope](https://soundscope.streamlit.app)
+
 SoundScope is an interactive music–analysis tool that blends Spotify-style audio features with machine-learning predictions inside a clean, intuitive Streamlit interface.  
 It is designed as both a data-science project and a functional demo application that allows users to explore songs, visualize audio characteristics, and experiment with predictive models.
 
