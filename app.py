@@ -268,36 +268,18 @@ with tab2:
 
         slider_values = {}
         slider_values["tempo"] = st.slider("Tempo (BPM)", 60, 200, 120)
-        slider_values["danceability"] = st.slider(
-            "Danceability (0–1)", 0.0, 1.0, 0.60, 0.01
-        )
-        slider_values["energy"] = st.slider("Energy (0–1)", 0.0, 1.0, 0.60, 0.01)
-        slider_values["valence"] = st.slider(
-            "Valence (0–1)", 0.0, 1.0, 0.50, 0.01
-        )
-        slider_values["loudness"] = st.slider(
-            "Loudness (dBFS, 0=max)", -20.0, 0.0, -7.0, 0.1
-        )
-        slider_values["acousticness"] = st.slider(
-            "Acousticness (0–1)", 0.0, 1.0, 0.30, 0.01
-        )
-        slider_values["instrumentalness"] = st.slider(
-            "Instrumentalness (0–1)", 0.0, 1.0, 0.10, 0.01
-        )
-        slider_values["speechiness"] = st.slider(
-            "Speechiness (0–1)", 0.0, 1.0, 0.05, 0.01
-        )
-        slider_values["liveness"] = st.slider(
-            "Liveness (0–1)", 0.0, 1.0, 0.15, 0.01
-        )
-        slider_values["popularity"] = st.slider(
-            "Popularity (0–100)", 0, 100, 65, 1
-        )
+        slider_values["danceability"] = st.slider("Danceability (0-1)", 0.0, 1.0, 0.60, 0.01)
+        slider_values["energy"] = st.slider("Energy (0-1)", 0.0, 1.0, 0.60, 0.01)
+        slider_values["valence"] = st.slider("Valence (0-1)", 0.0, 1.0, 0.50, 0.01)
+        slider_values["loudness"] = st.slider("Loudness (dBFS, 0=max)", -20.0, 0.0, -7.0, 0.1)
+        slider_values["acousticness"] = st.slider("Acousticness (0-1)", 0.0, 1.0, 0.30, 0.01)
+        slider_values["instrumentalness"] = st.slider("Instrumentalness (0-1)", 0.0, 1.0, 0.10, 0.01)
+        slider_values["speechiness"] = st.slider("Speechiness (0-1)", 0.0, 1.0, 0.05, 0.01)
+        slider_values["liveness"] = st.slider("Liveness (0-1)", 0.0, 1.0, 0.15, 0.01)
+        slider_values["popularity"] = st.slider("Popularity (0-100)", 0, 100, 65, 1)
 
         # Arrange inputs in the same order the model expects
-        x_custom = np.array(
-            [slider_values[col] for col in feature_cols], dtype=float
-        ).reshape(1, -1)
+        x_custom = np.array([slider_values[col] for col in feature_cols], dtype=float).reshape(1, -1)
 
     # ---------------------------
     # Right column: prediction + closest track
@@ -323,50 +305,71 @@ with tab2:
             class_labels = label_encoder.inverse_transform(np.arange(len(probs)))
             prob_dict = {label: float(p) for label, p in zip(class_labels, probs)}
 
-            # Bar chart of probabilities (taller, ticks every 10%)
+            # Bar chart of probabilities (taller)
             chart = mood_prob_chart(prob_dict, height=260)
             st.altair_chart(chart, use_container_width=True)
 
-            # Compact probability text instead of a big table
+            # Compact probability text list
             st.markdown("")
-            for mood, prob in sorted(
-                prob_dict.items(), key=lambda x: x[1], reverse=True
-            ):
+            for mood, prob in sorted(prob_dict.items(), key=lambda x: x[1], reverse=True):
                 st.markdown(f"- **{mood}** – {prob*100:.1f}%")
 
             st.markdown("---")
 
-            # --- Find closest track in the dataset to these slider settings ---
+            # --------------------------------------------------------
+            # Closest track logic — MIN–MAX normalized Euclidean distance
+            # --------------------------------------------------------
             st.subheader("Closest matching track in the dataset")
 
-            # Use raw numeric feature space for simplicity
-            X_all = df[feature_cols].to_numpy(dtype=float)
-            x_vec = np.array([slider_values[col] for col in feature_cols], dtype=float)
+            feature_ranges = {
+                "tempo": (60.0, 200.0),
+                "danceability": (0.0, 1.0),
+                "energy": (0.0, 1.0),
+                "valence": (0.0, 1.0),
+                "loudness": (-20.0, 0.0),
+                "acousticness": (0.0, 1.0),
+                "instrumentalness": (0.0, 1.0),
+                "speechiness": (0.0, 1.0),
+                "liveness": (0.0, 1.0),
+                "popularity": (0.0, 100.0),
+            }
 
-            # Euclidean distance to each track
-            dists = np.linalg.norm(X_all - x_vec, axis=1)
+            def minmax_normalize(col: str, val: float) -> float:
+                lo, hi = feature_ranges[col]
+                if hi <= lo:
+                    return 0.0
+                val_clipped = max(lo, min(hi, float(val)))
+                return (val_clipped - lo) / (hi - lo)
+
+            # Normalize slider vector
+            norm_slider_vec = np.array(
+                [minmax_normalize(col, slider_values[col]) for col in feature_cols],
+                dtype=float,
+            )
+
+            # Normalize entire dataset
+            norm_rows = []
+            for _, row in df[feature_cols].astype(float).iterrows():
+                norm_rows.append(
+                    [minmax_normalize(col, row[col]) for col in feature_cols]
+                )
+            norm_data = np.array(norm_rows, dtype=float)
+
+            # Euclidean distance in normalized space
+            dists = np.linalg.norm(norm_data - norm_slider_vec, axis=1)
             best_idx = int(np.argmin(dists))
             best_row = df.iloc[best_idx]
 
-
+            # Display closest track
             st.markdown(
                 f"**{best_row['track_name']} – {best_row['artist']}**  \n"
                 f"Genre: **{best_row['genre']}**, Era: **{best_row['era']}**, "
                 f"Labeled mood: **{best_row['mood']}**"
             )
-            st.caption(
-                "This is the track whose audio features are closest to your slider values."
-            )
+            st.caption("This is the track whose audio features are closest to your slider values.")
 
-            # Small comparison table for a few key features
-            compare_cols = [
-                "tempo",
-                "danceability",
-                "energy",
-                "valence",
-                "loudness",
-                "popularity",
-            ]
+            # Comparison table for a few key features
+            compare_cols = ["tempo", "danceability", "energy", "valence", "loudness", "popularity"]
             rows = []
             for col in compare_cols:
                 rows.append(
@@ -378,17 +381,12 @@ with tab2:
                 )
             compare_df = pd.DataFrame(rows)
             st.dataframe(
-                compare_df.style.format(
-                    {
-                        "your setting": "{:.2f}",
-                        "track value": "{:.2f}",
-                    }
-                ),
+                compare_df.style.format({"your setting": "{:.2f}", "track value": "{:.2f}"}),
                 use_container_width=True,
                 hide_index=True,
             )
 
-            # Embedded Spotify player if URL is available
+            # Spotify embed
             spotify_url_best = best_row.get("spotify_url", "")
             if isinstance(spotify_url_best, str) and spotify_url_best.strip():
                 st.markdown("##### Play preview of closest track")
