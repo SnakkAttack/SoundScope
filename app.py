@@ -76,6 +76,7 @@ def mood_prob_chart(prob_dict: dict, height: int = 260):
         [{"mood": mood, "probability": prob} for mood, prob in prob_dict.items()]
     )
 
+    # Ticks every 10% from 0 to 100%
     y_ticks = [i / 10 for i in range(0, 11)]
 
     chart = (
@@ -250,86 +251,147 @@ with tab1:
                     st.info("No Spotify preview available for this track in the dataset.")
 
 # -------------------------------------------------------------------
-# TAB 2: Slider playground. Experiment with custom feature vectors
+# TAB 2: Slider playground – same look as before + closest track
 # -------------------------------------------------------------------
 with tab2:
-    st.subheader("Playground: tweak audio features and see the mood")
+    col_sliders, col_pred = st.columns([1.3, 1])
 
-    col_left_pg, col_right_pg = st.columns([1.1, 1])
-
-    with col_left_pg:
-        st.markdown("Adjust the sliders to create a hypothetical track:")
-
-        tempo = st.slider("Tempo (BPM)", min_value=60, max_value=200, value=120, step=2)
-        danceability = st.slider(
-            "Danceability (0–1)", min_value=0.0, max_value=1.0, value=0.6, step=0.01
-        )
-        energy = st.slider(
-            "Energy (0–1)", min_value=0.0, max_value=1.0, value=0.6, step=0.01
-        )
-        valence = st.slider(
-            "Valence (0–1)", min_value=0.0, max_value=1.0, value=0.5, step=0.01
-        )
-        loudness = st.slider(
-            "Loudness (dBFS, 0=max)",
-            min_value=-20.0,
-            max_value=0.0,
-            value=-6.0,
-            step=0.5,
-        )
-        acousticness = st.slider(
-            "Acousticness (0–1)", min_value=0.0, max_value=1.0, value=0.3, step=0.01
-        )
-        instrumentalness = st.slider(
-            "Instrumentalness (0–1)", min_value=0.0, max_value=1.0, value=0.1, step=0.01
-        )
-        speechiness = st.slider(
-            "Speechiness (0–1)", min_value=0.0, max_value=1.0, value=0.05, step=0.01
-        )
-        liveness = st.slider(
-            "Liveness (0–1)", min_value=0.0, max_value=1.0, value=0.15, step=0.01
-        )
-        popularity = st.slider(
-            "Popularity (0–100)", min_value=0, max_value=100, value=60, step=5
+    # ---------------------------
+    # Left column: sliders
+    # ---------------------------
+    with col_sliders:
+        st.header("Playground: tweak audio features and see the mood")
+        st.write(
+            "Adjust the sliders to create a hypothetical track and see how the model "
+            "responds. Then we’ll find the closest real track in the dataset."
         )
 
-        # Build a Series with the same feature names the model expects
-        feature_values = {
-            "tempo": tempo,
-            "danceability": danceability,
-            "energy": energy,
-            "valence": valence,
-            "loudness": loudness,
-            "acousticness": acousticness,
-            "instrumentalness": instrumentalness,
-            "speechiness": speechiness,
-            "liveness": liveness,
-            "popularity": popularity,
-        }
-
-        # In case feature_cols is a subset/superset, align
-        series_for_model = pd.Series(
-            {col: feature_values[col] for col in feature_cols}
+        slider_values = {}
+        slider_values["tempo"] = st.slider("Tempo (BPM)", 60, 200, 120)
+        slider_values["danceability"] = st.slider(
+            "Danceability (0–1)", 0.0, 1.0, 0.60, 0.01
+        )
+        slider_values["energy"] = st.slider("Energy (0–1)", 0.0, 1.0, 0.60, 0.01)
+        slider_values["valence"] = st.slider(
+            "Valence (0–1)", 0.0, 1.0, 0.50, 0.01
+        )
+        slider_values["loudness"] = st.slider(
+            "Loudness (dBFS, 0=max)", -20.0, 0.0, -7.0, 0.1
+        )
+        slider_values["acousticness"] = st.slider(
+            "Acousticness (0–1)", 0.0, 1.0, 0.30, 0.01
+        )
+        slider_values["instrumentalness"] = st.slider(
+            "Instrumentalness (0–1)", 0.0, 1.0, 0.10, 0.01
+        )
+        slider_values["speechiness"] = st.slider(
+            "Speechiness (0–1)", 0.0, 1.0, 0.05, 0.01
+        )
+        slider_values["liveness"] = st.slider(
+            "Liveness (0–1)", 0.0, 1.0, 0.15, 0.01
+        )
+        slider_values["popularity"] = st.slider(
+            "Popularity (0–100)", 0, 100, 65, 1
         )
 
-    with col_right_pg:
-        st.subheader("Model prediction for slider settings")
+        # Arrange inputs in the same order the model expects
+        x_custom = np.array(
+            [slider_values[col] for col in feature_cols], dtype=float
+        ).reshape(1, -1)
 
-        if st.button("Predict mood from sliders"):
-            pred_label_pg, prob_dict_pg = predict_mood(series_for_model)
+    # ---------------------------
+    # Right column: prediction + closest track
+    # ---------------------------
+    with col_pred:
+        st.header("Model prediction for slider settings")
 
+        if st.button("Predict mood from sliders", key="slider_predict"):
+            # --- Model prediction for these custom values ---
+            pred_idx = model.predict(x_custom)[0]
+            probs = model.predict_proba(x_custom)[0]
+            pred_label = label_encoder.inverse_transform([pred_idx])[0]
+
+            # Badge-style predicted label
             st.markdown(
-                f"**Predicted mood:** "
+                f"Predicted mood: "
                 f"<span style='background-color:#16a34a; padding:0.2rem 0.6rem; "
-                f"border-radius:999px; color:white;'>{pred_label_pg}</span>",
+                f"border-radius:999px; color:white;'>{pred_label}</span>",
                 unsafe_allow_html=True,
             )
 
-            chart_pg = mood_prob_chart(prob_dict_pg, height=300)
-            st.altair_chart(chart_pg, use_container_width=True)
+            # Build probability dict in label order
+            class_labels = label_encoder.inverse_transform(np.arange(len(probs)))
+            prob_dict = {label: float(p) for label, p in zip(class_labels, probs)}
 
+            # Bar chart of probabilities (taller, ticks every 10%)
+            chart = mood_prob_chart(prob_dict, height=260)
+            st.altair_chart(chart, use_container_width=True)
+
+            # Compact probability text instead of a big table
             st.markdown("")
             for mood, prob in sorted(
-                prob_dict_pg.items(), key=lambda x: x[1], reverse=True
+                prob_dict.items(), key=lambda x: x[1], reverse=True
             ):
                 st.markdown(f"- **{mood}** – {prob*100:.1f}%")
+
+            st.markdown("---")
+
+            # --- Find closest track in the dataset to these slider settings ---
+            st.subheader("Closest matching track in the dataset")
+
+            # Use raw numeric feature space for simplicity
+            X_all = df[feature_cols].to_numpy(dtype=float)
+            x_vec = np.array([slider_values[col] for col in feature_cols], dtype=float)
+
+            # Euclidean distance to each track
+            dists = np.linalg.norm(X_all - x_vec, axis=1)
+            best_idx = int(np.argmin(dists))
+            best_row = df.iloc[best_idx]
+
+
+            st.markdown(
+                f"**{best_row['track_name']} – {best_row['artist']}**  \n"
+                f"Genre: **{best_row['genre']}**, Era: **{best_row['era']}**, "
+                f"Labeled mood: **{best_row['mood']}**"
+            )
+            st.caption(
+                "This is the track whose audio features are closest to your slider values."
+            )
+
+            # Small comparison table for a few key features
+            compare_cols = [
+                "tempo",
+                "danceability",
+                "energy",
+                "valence",
+                "loudness",
+                "popularity",
+            ]
+            rows = []
+            for col in compare_cols:
+                rows.append(
+                    {
+                        "feature": col,
+                        "your setting": slider_values[col],
+                        "track value": best_row[col],
+                    }
+                )
+            compare_df = pd.DataFrame(rows)
+            st.dataframe(
+                compare_df.style.format(
+                    {
+                        "your setting": "{:.2f}",
+                        "track value": "{:.2f}",
+                    }
+                ),
+                use_container_width=True,
+                hide_index=True,
+            )
+
+            # Embedded Spotify player if URL is available
+            spotify_url_best = best_row.get("spotify_url", "")
+            if isinstance(spotify_url_best, str) and spotify_url_best.strip():
+                st.markdown("##### Play preview of closest track")
+                embed_spotify_player(spotify_url_best, height=152)
+            else:
+                st.info("No Spotify URL stored for this track in the dataset.")
