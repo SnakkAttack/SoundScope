@@ -215,7 +215,7 @@ The model updates its mood prediction in real time and displays the probabilitie
 - Introduce a popularity-trend prediction model.
 - Add richer visualizations for energy, valence, and tempo distributions.
 - Improve the embedded playback layout and responsiveness.
-- Add a “similar songs” recommendation panel based on feature distance.
+- IMPLEMENTED * Add a “similar songs” recommendation panel based on feature distance.
 
 ### Medium-Term Features
 - User-uploaded CSV support to run predictions on personal datasets.
